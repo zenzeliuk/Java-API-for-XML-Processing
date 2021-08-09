@@ -15,7 +15,7 @@ import java.util.Set;
 public class StudentsSaxBuilder {
 
     private Set<Student> students;
-    private StudentHandler handler = new StudentHandler();
+    private final StudentHandler handler = new StudentHandler();
     private XMLReader reader;
 
     public StudentsSaxBuilder() {
@@ -24,7 +24,7 @@ public class StudentsSaxBuilder {
             SAXParser saxParser = factory.newSAXParser();
             reader = saxParser.getXMLReader();
         } catch (ParserConfigurationException | SAXException e) {
-            e.printStackTrace(); // log
+            e.printStackTrace();
         }
         reader.setErrorHandler(new StudentErrorHandler());
         reader.setContentHandler(handler);
@@ -36,7 +36,7 @@ public class StudentsSaxBuilder {
         try {
             reader.parse(filename);
         } catch (IOException | SAXException e) {
-            e.printStackTrace(); // log
+            e.printStackTrace();
         }
         students = handler.getStudents();
     }
